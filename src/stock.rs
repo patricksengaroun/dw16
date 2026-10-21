@@ -30,7 +30,7 @@ impl Shelf {
     /// assert_eq!(shelf.level(), 20);
     /// ```
     pub fn add(&mut self, amount: i32) {
-        self.current -= amount;
+        self.current += amount;
         if self.current > self.max {
             self.current = self.max;
         }
@@ -50,7 +50,10 @@ impl Shelf {
     /// ```
     pub fn remove(&mut self, amount: i32) {
         self.current -= amount;
+        if self.current < 0 {
+            self.current = 0;
     }
+}
 
     /// How many items are on the shelf right now.
     ///
@@ -62,6 +65,6 @@ impl Shelf {
     /// assert_eq!(shelf.level(), 7);
     /// ```
     pub fn level(&self) -> i32 {
-        self.max
+        self.current
     }
 }
